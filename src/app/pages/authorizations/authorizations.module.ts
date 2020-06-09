@@ -5,7 +5,7 @@ import { AuthorizationsRoutingModule } from './authorizations-routing.module';
 import { AuthorizationFormComponent } from './authorization-form/authorization-form.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AuthorizationsTableComponent } from './authorizations-table/authorizations-table.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,8 +14,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxLoaderIndicatorModule } from "ngx-loader-indicator";
+import { NgxLoaderIndicatorModule } from 'ngx-loader-indicator';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { MatPaginatorTranslate } from '../../shared/MatPaginatorTranslate';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     AuthorizationsComponent,
     AuthorizationFormComponent,
     AuthorizationsTableComponent
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: MatPaginatorTranslate }
   ]
 })
 export class AuthorizationsModule {
