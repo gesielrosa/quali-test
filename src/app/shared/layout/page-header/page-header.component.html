@@ -1,0 +1,36 @@
+<nav class="shadow-sm">
+  <div class="row justify-content-center m-0">
+    <div class="col-sm-12 col-md-10 col-lg-8">
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <div class="logo">
+            <a [routerLink]="['/']">
+              <img src="assets/images/logo.png" alt="Quali Test" title="Quali Test">
+            </a>
+          </div>
+        </div>
+        <div class="col align-self-center text-right">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" [routerLink]="['/authorizations']">
+              Autorizações
+            </button>
+            <button type="button" class="btn btn-primary" [routerLink]="['/authorizations/new']">
+              Nova Autorização
+            </button>
+          </div>
+          <div class="btn-group btn-social" ngbDropdown placement="bottom-right">
+            <button id="dropdown" ngbDropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
+                    aria-controls="dropdown-animated">
+              Links <span class="caret"></span>
+            </button>
+            <ul ngbDropdownMenu class="dropdown-menu" role="menu" aria-labelledby="dropdown">
+              <li role="menuitem"><a class="dropdown-item" href="https://br.linkedin.com/in/gesielrosa/" target="_blank">LinkedIn</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="https://www.instagram.com/gesielrosa/" target="_blank">Instagram</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="https://www.facebook.com/gesielrosa/" target="_blank">Facebook</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

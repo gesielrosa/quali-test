@@ -1,0 +1,97 @@
+<app-page-header></app-page-header>
+<app-page-content>
+
+  <p class="h5 mx-4 py-2">
+    <ng-container *ngIf="form?.controls['id']?.value">
+      Autorização #{{form?.controls['id']?.value}}
+    </ng-container>
+    <ng-container *ngIf="!form?.controls['id']?.value">
+      Cadastro de Autorizações
+    </ng-container>
+  </p>
+  <p class="mx-4 text-black-50" *ngIf="mode !== 'details'">Preencha a autorização com os dados do solicitante.</p>
+
+  <div class="p-3" [loader]="isLoading">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline" class="wd-100">
+            <mat-label>Nº Procedimento</mat-label>
+            <input formControlName="procedure" type="number" matInput [readonly]="mode === 'details'">
+            <mat-error>Campo inválido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6 align-self-center" *ngIf="mode === 'details'">
+          <p class="h5 text-center">Situação:
+            <span [ngClass]="authorization?.status?.code === 'authorized' ? 'text-success' : 'text-danger'">
+              {{getStatusText(authorization?.status?.code)}}
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline" class="wd-100">
+            <mat-label>Nome</mat-label>
+            <input formControlName="requester" type="text" matInput [readonly]="mode === 'details'">
+            <mat-error>Campo inválido</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline" class="wd-100">
+            <mat-label>Idade</mat-label>
+            <input formControlName="age" type="number" matInput [readonly]="mode === 'details'">
+            <mat-error>Campo inválido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="outline" class="wd-100">
+            <mat-label>Sexo</mat-label>
+            <mat-select formControlName="gender" [disabled]="mode === 'details'">
+              <mat-option value="m">Masculino</mat-option>
+              <mat-option value="f">Feminino</mat-option>
+            </mat-select>
+            <mat-error>Campo inválido</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mt-5" *ngIf="mode !== 'details'">
+        <div class="col">
+          <button type="button" *ngIf="form?.controls['id']?.value"
+                  [swal]="deleteSwal" class="btn btn-outline-danger mr-2">
+            Excluir
+          </button>
+        </div>
+        <div class="col text-right">
+          <button type="submit" [disabled]="form?.invalid" (click)="doSave()" class="btn btn-primary">
+            Salvar Cadastro
+          </button>
+        </div>
+      </div>
+      <div class="alert alert-danger mt-4" role="alert"
+           *ngIf="mode === 'details' && authorization?.status?.code === 'refused'">
+        <h5 class="alert-heading">Motivos:</h5>
+        <ul class="mt-4 mb-0">
+          <li *ngFor="let reason of authorization?.status?.reasons">
+            {{reason}}
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+
+  <swal
+    #deleteSwal
+    title="Remover cadastro?"
+    text="Tem certeza que deseja remover o cadsatro?"
+    icon="question"
+    cancelButtonText="Cancelar"
+    confirmButtonText="Confirmar"
+    [showCancelButton]="true"
+    [focusCancel]="true"
+    (confirm)="doRemove()">
+  </swal>
+
+</app-page-content>

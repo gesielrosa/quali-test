@@ -1,0 +1,64 @@
+<div class="wd-100" [loader]="isLoading">
+  <table mat-table [dataSource]="dataSource" class="wd-100 mb-4">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="requester">
+      <th mat-header-cell *matHeaderCellDef>Solicitante</th>
+      <td mat-cell *matCellDef="let element"> {{element.requester}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef>Idade</th>
+      <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef>Sexo</th>
+      <td mat-cell *matCellDef="let element"> {{getGenderText(element?.gender)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="procedure">
+      <th mat-header-cell *matHeaderCellDef>Procedimento</th>
+      <td mat-cell *matCellDef="let element"> {{element.procedure}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let element"> {{getStatusText(element?.status?.code)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <div class="text-right">
+          <a [routerLink]="[element.id, 'edit']" class="btn btn-link btn-sm mr-2">
+            Editar
+          </a>
+          <a [routerLink]="[element.id, 'details']" class="btn btn-outline-primary btn-sm">
+            Visualizar
+          </a>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator *ngIf="pagination && showPaginator"
+                 [length]="pagination.total"
+                 [pageSize]="pagination.rpp"
+                 [pageSizeOptions]="[5, 10, 20, 50, 100]"
+                 [showFirstLastButtons]="true"
+                 (page)="paginatorChanged($event)"
+                 [hidden]="authorizations?.length === 0">
+  </mat-paginator>
+
+  <div *ngIf="authorizations?.length === 0">
+    <p class="text-center my-4">Nenhum item encontrado</p>
+  </div>
+</div>

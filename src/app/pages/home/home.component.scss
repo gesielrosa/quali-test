@@ -1,0 +1,13 @@
+@import "src/styles";
+
+.card-primary {
+  background-color: lighten($secondary, 25);
+}
+
+.card-success {
+  background-color: lighten($primary, 50);
+}
+
+.card-alert {
+  background-color: lighten($danger, 25);
+}

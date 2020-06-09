@@ -1,0 +1,80 @@
+<app-page-header></app-page-header>
+<app-page-content>
+
+  <p class="h5 mx-4 py-2">Autorizações</p>
+
+  <ng-container>
+    <mat-accordion>
+      <mat-expansion-panel class="shadow-none mb-3">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="wd-100 text-right">Filtros</div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="row filters rounded p-3">
+          <div class="col-6 col-md-4 col-lg">
+            <mat-form-field appearance="outline" class="wd-100">
+              <mat-label>ID</mat-label>
+              <input [(ngModel)]="search.id" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-6 col-md-4 col-lg">
+            <mat-form-field appearance="outline" class="wd-100">
+              <mat-label>Solicitante</mat-label>
+              <input [(ngModel)]="search.requester" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-6 col-md-4 col-lg">
+            <mat-form-field appearance="outline" class="wd-100">
+              <mat-label>Idade</mat-label>
+              <input [(ngModel)]="search.age" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-6 col-md-4 col-lg">
+            <mat-form-field appearance="outline" class="wd-100">
+              <mat-label>Sexo</mat-label>
+              <mat-select [(ngModel)]="search.gender">
+                <mat-option value="m">Masculino</mat-option>
+                <mat-option value="f">Feminino</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 col-md-4 col-lg">
+            <mat-form-field appearance="outline" class="wd-100">
+              <mat-label>Nº Procedimento</mat-label>
+              <input [(ngModel)]="search.procedure" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-right">
+            <button class="btn btn-outline-danger mr-2" (click)="doClearFilters()">Limpar</button>
+            <button class="btn btn-primary" (click)="doSearch()">Filtrar</button>
+          </div>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+
+  <mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>list</mat-icon> Todas
+      </ng-template>
+      <app-authorizations-table [params]="{status: status[0]}" [$loadStatus]="$loadStatus"></app-authorizations-table>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon color="primary">check</mat-icon> Aceitas
+      </ng-template>
+      <app-authorizations-table [params]="{status: status[1]}" [$loadStatus]="$loadStatus"></app-authorizations-table>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon color="warn">close</mat-icon> Negadas
+      </ng-template>
+      <app-authorizations-table [params]="{status: status[2]}" [$loadStatus]="$loadStatus"></app-authorizations-table>
+    </mat-tab>
+  </mat-tab-group>
+
+</app-page-content>
