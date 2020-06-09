@@ -10,3 +10,56 @@ $color4: rgb(121, 139, 172);
 
 $white: white;
 $black: black;
+$mkp-danger: #f44336;
+$grey-40: #808080;
+$grey-50: #606060;
+
+@import "~@angular/material/theming";
+
+$mat-theme-default: (
+  50: lighten($primary, 50),
+  100: lighten($primary, 40),
+  200: lighten($primary, 30),
+  300: lighten($primary, 20),
+  400: lighten($primary, 10),
+  500: $primary,
+  600: darken($primary, 10),
+  700: darken($primary, 20),
+  800: darken($primary, 30),
+  900: darken($primary, 40),
+  A100: lighten($primary, 70),
+  A200: lighten($primary, 15),
+  A400: darken($primary, 70),
+  A700: darken($primary, 80),
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
+  )
+);
+
+@include mat-core();
+
+$app-primary: mat-palette($mat-theme-default);
+$app-accent: mat-palette($mat-indigo, A200, A100, A400);
+$app-warn: mat-palette($mat-red);
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+@include angular-material-theme($app-theme);
+//#############################################
+
+//################## Material Variables ##################
+$mat-error-color: $mkp-danger;
+$mat-info-color: $grey-40;
+$mat-tab-label: $grey-40;
+$mat-tab-body: $grey-50;
